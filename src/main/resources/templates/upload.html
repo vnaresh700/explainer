@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Legal Doc Explainer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 90%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        hr {
+            margin: 30px 0;
+            border: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        textarea {
+            width: 90%;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: none;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        p[style="color:red"] {
+            font-weight: bold;
+        }
+
+        div {
+            margin: 20px auto;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Legal Explainer</h1>
+    <p>Upload your legal document to get a simple explanation</p>
+</header>
+
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf,.docx" required><br><br>
+    <button type="submit">Upload & Explain</button>
+</form>
+
+<hr>
+
+<div th:if="${explanation}">
+    <h2>AI Explanation</h2>
+    <textarea th:text="${explanation}" readonly rows="20" cols="80"></textarea>
+</div>
+
+<div th:if="${error}">
+    <p style="color:red" th:text="${error}"></p>
+</div>
+</body>
+</html>
