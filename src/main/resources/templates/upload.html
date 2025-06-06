@@ -98,7 +98,7 @@
 <header>
     <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
         <div style="display: flex; align-items: center;">
-            <img src="/path/to/logo.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <img src="/logo.png" alt="Logo" style="height: 50px; width: 50x; margin-right: 10px;">
             <h1 style="margin: 0;">Legal Explainer</h1>
         </div>
         <nav>
@@ -117,10 +117,19 @@
     <button type="submit">Upload & Explain</button>
 </form>
 
-<form method="post" action="/query" enctype="application/x-www-form-urlencoded">
-    <textarea name="query" placeholder="Enter your query here..." rows="5" cols="50" required></textarea><br><br>
-    <button type="submit">Submit Query</button>
+<hr>
+<h3>Or Ask a Legal Question</h3>
+<form action="/ask" method="post">
+    <label for="query">Your Question:</label><br>
+    <textarea id="query" name="query" rows="4" cols="50" required></textarea><br><br>
+    <button type="submit">Ask AI</button>
 </form>
+
+<!-- Show response if exists -->
+<div style="margin-top: 20px;">
+    <h4 th:if="${aiAnswer != null}">Answer:</h4>
+    <p th:text="${aiAnswer}"></p>
+</div>
 
 <div th:if="${queryResponse}">
     <h2>AI Response</h2>

@@ -124,5 +124,4 @@ public class OpenAIService {
                 .sslContext(sc)
                 .build();
     }
-
 }

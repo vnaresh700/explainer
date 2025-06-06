@@ -1,5 +1,6 @@
 package com.legalsaas.explainer.controller;
 
+import com.legalsaas.explainer.service.AskAIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,9 @@ public class UploadController {
 
     @Autowired
     private OpenAIService openAIService;
+
+    @Autowired
+    private AskAIService askAIService;
 
     @GetMapping("/")
     public String showForm() {
@@ -33,14 +37,19 @@ public class UploadController {
         return "upload";
     }
 
-    @PostMapping("/query")
-    public String handleUserQuery(@RequestParam("query") String query, Model model) {
+    @PostMapping("/ask")
+    public String askAI(@RequestParam("query") String query, Model model) {
         try {
-            String response = openAIService.explainText(query);
-            model.addAttribute("queryResponse", response);
+            String prompt = "You are a legal assistant. Answer the following question clearly:\n" + query;
+
+            String aiAnswer = askAIService.askOpenAI(prompt); // use your existing service
+            model.addAttribute("aiAnswer", aiAnswer);
+
         } catch (Exception e) {
-            model.addAttribute("error", "Error: " + e.getMessage());
+            model.addAttribute("aiAnswer", "Error while contacting AI: " + e.getMessage());
         }
-        return "upload";
+
+        return "upload"; // or whatever your template name is
     }
+
 }
