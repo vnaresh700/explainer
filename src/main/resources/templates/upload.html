@@ -117,10 +117,19 @@
     <button type="submit">Upload & Explain</button>
 </form>
 
-<form method="post" action="/query" enctype="application/x-www-form-urlencoded">
-    <textarea name="query" placeholder="Enter your query here..." rows="5" cols="50" required></textarea><br><br>
-    <button type="submit">Submit Query</button>
+<hr>
+<h3>Or Ask a Legal Question</h3>
+<form action="/ask" method="post">
+    <label for="query">Your Question:</label><br>
+    <textarea id="query" name="query" rows="4" cols="50" required></textarea><br><br>
+    <button type="submit">Ask AI</button>
 </form>
+
+<!-- Show response if exists -->
+<div style="margin-top: 20px;">
+    <h4 th:if="${aiAnswer != null}">Answer:</h4>
+    <p th:text="${aiAnswer}"></p>
+</div>
 
 <div th:if="${queryResponse}">
     <h2>AI Response</h2>
