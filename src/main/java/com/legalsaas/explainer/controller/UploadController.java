@@ -32,4 +32,15 @@ public class UploadController {
         }
         return "upload";
     }
+
+    @PostMapping("/query")
+    public String handleUserQuery(@RequestParam("query") String query, Model model) {
+        try {
+            String response = openAIService.explainText(query);
+            model.addAttribute("queryResponse", response);
+        } catch (Exception e) {
+            model.addAttribute("error", "Error: " + e.getMessage());
+        }
+        return "upload";
+    }
 }

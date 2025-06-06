@@ -15,14 +15,14 @@
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 20px 0;
+            padding: 5px 0;
             margin: 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         header h1 {
             margin: 0;
-            font-size: 36px;
+            font-size: 30px;
         }
 
         header p {
@@ -96,14 +96,36 @@
 </head>
 <body>
 <header>
-    <h1>Legal Explainer</h1>
-    <p>Upload your legal document to get a simple explanation</p>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+        <div style="display: flex; align-items: center;">
+            <img src="/path/to/logo.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <h1 style="margin: 0;">Legal Explainer</h1>
+        </div>
+        <nav>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 20px;">
+                <li><a href="#features" style="text-decoration: none; color: white;">Features</a></li>
+                <li><a href="#services" style="text-decoration: none; color: white;">Services</a></li>
+                <li><a href="#about" style="text-decoration: none; color: white;">About Us</a></li>
+                <li><a href="#login" style="text-decoration: none; color: white;">Login</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <form method="post" action="/upload" enctype="multipart/form-data">
     <input type="file" name="file" accept=".pdf,.docx" required><br><br>
     <button type="submit">Upload & Explain</button>
 </form>
+
+<form method="post" action="/query" enctype="application/x-www-form-urlencoded">
+    <textarea name="query" placeholder="Enter your query here..." rows="5" cols="50" required></textarea><br><br>
+    <button type="submit">Submit Query</button>
+</form>
+
+<div th:if="${queryResponse}">
+    <h2>AI Response</h2>
+    <textarea th:text="${queryResponse}" readonly rows="20" cols="80"></textarea>
+</div>
 
 <hr>
 
@@ -115,5 +137,18 @@
 <div th:if="${error}">
     <p style="color:red" th:text="${error}"></p>
 </div>
+
+...
+<div th:if="${error}">
+    <p style="color:red" th:text="${error}"></p>
+</div>
+
+<footer>
+    <p>&copy; 2025 Legal Explainer. All rights reserved.</p>
+    <p>Contact us at: <a href="mailto:test@legalexplainer.com">test@legalexplainer.com</a></p>
+</footer>
+</body>
+</html>
+
 </body>
 </html>
